@@ -1,0 +1,35 @@
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4rem;
+}
+
+.allTaskContent, .concluedTaskContent {
+  font-size: 0.875rem;
+  color: var(--blue);
+  font-weight: bold;
+  line-height: 1.7;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.concluedTaskContent {
+  color: var(--purple);
+}
+
+.counterAllTasks, .counterConcluedTasks {
+  width: 1.563rem;
+  height: 1.188rem;
+  background: var(--gray-400);
+  color: var(--gray-200);
+  border-radius: 10px;
+  padding: 2px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-left: 0.5rem;
+  font-size: 0.75rem;
+}
