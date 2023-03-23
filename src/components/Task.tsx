@@ -1,21 +1,34 @@
 import styles from './Task.module.css'
 import { Trash, Check } from 'phosphor-react'
+import { useState } from 'react'
 
-export function Taks({ isChecked = true, content, onDeleteTask }) {
+export function Taks({ content, onDeleteTask }) {
+  const [checkTask, setCheckTask] = useState(false)
+
+  const isChecked = checkTask ? styles.btnCheckElement : styles.btnUncheckElement
+  const isCheckedText = checkTask ? styles.taskTextChecked : ''
+  const isCheckedButtonIcon = checkTask ? <Check /> : null
 
   function handleDeleteTask() {
     onDeleteTask(content)
   }
 
+  function handleChangeCheckTask() {
+    setCheckTask(!checkTask)
+  }
+
   return (
     <div className={styles.mainTask}>
 
-      <div className={styles.contentTask}>
-        <button className={styles.btnCheckElement}>
-          <Check />
+      <div      
+        onClick={handleChangeCheckTask}
+        className={styles.contentTask}
+      >
+        <button className={isChecked}>
+          { isCheckedButtonIcon }
         </button>
         
-        <span>
+        <span className={isCheckedText}>
           { content }
         </span>
       </div>

@@ -19,8 +19,15 @@
 }
 
 .contentTask {
+    flex-basis: 100%;
     display: flex;
     align-items: start;
+    cursor: pointer;
+}
+
+.taskTextChecked {
+    color: var(--gray-300);
+    text-decoration: line-through;
 }
 
 .btnDelete {
@@ -46,7 +53,8 @@
 }
 
 .btnUncheckElement {
-    width: 1.2rem;
+    max-width: 1.2rem;
+    width: 100%;
     height: 1.2rem;
     border-radius: 50%;
     border: 2px solid var(--blue);
@@ -56,7 +64,8 @@
 }
 
 .btnCheckElement {
-    width: 1.2rem;
+    max-width: 1.2rem;
+    width: 100%;
     height: 1.2rem;
     border-radius: 50%;
     border: 2px solid var(--purple-dark);
