@@ -28,8 +28,14 @@
   transition: background-color 0.1s;
 }
 
-.submit:hover {
+.submit:not(:disabled):hover {
   background: var(--blue);
+}
+
+.submit:disabled {
+  cursor: not-allowed;
+  background: var(--blue-dark);
+  opacity: 0.9;
 }
 
 .textButton {
