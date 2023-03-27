@@ -2,7 +2,7 @@ import styles from './Task.module.css'
 import { Trash, Check } from 'phosphor-react'
 import { useState } from 'react'
 
-export function Taks({ content, onDeleteTask }) {
+export function Taks({ content, onDeleteTask, onCompletedTaks, onUncompletedTasks }) {
   const [checkTask, setCheckTask] = useState(false)
 
   const isChecked = checkTask ? styles.btnCheckElement : styles.btnUncheckElement
@@ -15,6 +15,8 @@ export function Taks({ content, onDeleteTask }) {
 
   function handleChangeCheckTask() {
     setCheckTask(!checkTask)
+
+    checkTask ? onUncompletedTasks() : onCompletedTaks()
   }
 
   return (

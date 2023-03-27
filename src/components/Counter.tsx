@@ -5,7 +5,12 @@ interface Counter {
   completedTasks: number
 }
 
-export function Counter({ allTaks, completedTasks }: Counter) {
+export function Counter({ allTaks, completedTasks, onEmptyTasks }: Counter) {
+
+  () => {
+    onEmptyTasks()
+  }
+
   return (
     <div className={ styles.counter }>
       <div className={ styles.allTaskContent }>
@@ -14,7 +19,7 @@ export function Counter({ allTaks, completedTasks }: Counter) {
       </div>
       <div className={ styles.concluedTaskContent }>
         Concluídas
-        <span className={ styles.counterAllTasks }>{ completedTasks }</span>
+        <span className={ styles.counterAllTasks }>{ completedTasks } de { allTaks }</span>
       </div>
     </div>
   )

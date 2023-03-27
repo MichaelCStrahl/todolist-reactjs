@@ -12,6 +12,10 @@
   border: 1px solid var(--gray-700);
   border-radius: 8px;
   padding-left: 1rem;
+  color: var(--gray-100);
+}
+
+.formTaks input[type="text"]::placeholder {
   color: var(--gray-300);
 }
 

@@ -21,7 +21,7 @@
 }
 
 .counterAllTasks, .counterConcluedTasks {
-  width: 1.563rem;
+  min-width: 1.563rem;
   height: 1.188rem;
   background: var(--gray-400);
   color: var(--gray-200);
