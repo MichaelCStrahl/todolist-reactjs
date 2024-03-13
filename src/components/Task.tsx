@@ -1,43 +1,61 @@
-import styles from './Task.module.css'
-import { Trash, Check } from 'phosphor-react'
-import { useState } from 'react'
+import { Check, Trash } from "phosphor-react";
+import { useState } from "react";
+import styles from "./Task.module.css";
 
-export function Taks({ content, onDeleteTask, onCompletedTaks, onUncompletedTasks }) {
-  const [checkTask, setCheckTask] = useState(false)
+interface Task {
+	content: string;
+	onDeleteTask: (taskToDelete: string) => void;
+	onCompletedTask: () => void;
+	onUncompletedTasks: () => void;
+}
 
-  const isChecked = checkTask ? styles.btnCheckElement : styles.btnUncheckElement
-  const isCheckedText = checkTask ? styles.taskTextChecked : ''
-  const isCheckedButtonIcon = checkTask ? <Check /> : null
+export function Task({
+	content,
+	onDeleteTask,
+	onCompletedTask,
+	onUncompletedTasks,
+}: Task) {
+	const [checkTask, setCheckTask] = useState(false);
 
-  function handleDeleteTask() {
-    onDeleteTask(content)
-  }
+	const isChecked = checkTask
+		? styles.btnCheckElement
+		: styles.btnUncheckElement;
+	const isCheckedText = checkTask ? styles.taskTextChecked : "";
+	const isCheckedButtonIcon = checkTask ? <Check /> : null;
 
-  function handleChangeCheckTask() {
-    setCheckTask(!checkTask)
+	function handleDeleteTask() {
+		onDeleteTask(content);
+	}
 
-    checkTask ? onUncompletedTasks() : onCompletedTaks()
-  }
+	function handleChangeCheckTask() {
+		setCheckTask(!checkTask);
 
-  return (
-    <div className={styles.mainTask}>
+		checkTask ? onUncompletedTasks() : onCompletedTask();
+	}
 
-      <div      
-        onClick={handleChangeCheckTask}
-        className={styles.contentTask}
-      >
-        <button className={isChecked}>
-          { isCheckedButtonIcon }
-        </button>
-        
-        <span className={isCheckedText}>
-          { content }
-        </span>
-      </div>
+	return (
+		<div className={styles.mainTask}>
+			<div
+				onClick={handleChangeCheckTask}
+				onKeyUp={handleChangeCheckTask}
+				className={styles.contentTask}
+			>
+				{/* biome-ignore lint/a11y/useButtonType: <explanation> */}
+				<button
+					aria-checked={checkTask}
+					onClick={handleChangeCheckTask}
+					className={isChecked}
+				>
+					{isCheckedButtonIcon}
+				</button>
 
-      <button onClick={handleDeleteTask} className={styles.btnDelete}>
-        <Trash />
-      </button>
-    </div>
-  )
+				<span className={isCheckedText}>{content}</span>
+			</div>
+
+			{/* biome-ignore lint/a11y/useButtonType: <explanation> */}
+			<button onClick={handleDeleteTask} className={styles.btnDelete}>
+				<Trash />
+			</button>
+		</div>
+	);
 }

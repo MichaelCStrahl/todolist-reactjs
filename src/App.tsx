@@ -1,89 +1,94 @@
-import { Header } from "./components/Header"
-import { FormTask } from "./components/FormTask"
-import { Counter } from "./components/Counter"
-import { Taks } from "./components/Task"
-import { EmptyTasks } from "./components/EmptyTasks"
+import { Counter } from "./components/Counter";
+import { EmptyTasks } from "./components/EmptyTasks";
+import { FormTask } from "./components/FormTask";
+import { Header } from "./components/Header";
+import { Task } from "./components/Task";
 
-import styles from './App.module.css'
-import { useState } from "react"
+import { useState } from "react";
+import styles from "./App.module.css";
 
 export function App() {
+	const [tasks, setTasks] = useState([""]);
+	const [newTask, setNewTask] = useState("");
+	const [countTasks, setCountTasks] = useState(0);
+	const [countCompletedTasks, setCountCompletedTasks] = useState(0);
+	const [taskEmpty, setTaskEmpty] = useState(true);
 
-  const [tasks, setTasks] = useState([''])
-  const [newTask, setNewTask] = useState('')
-  const [countTasks, setCountTasks] = useState(0)
-  const [countCompletedTasks, setCountCompletedTasks] = useState(0)
-  const [taskEmpty, setTaskEmpty] = useState(true)
+	const isTaskEmpty = countTasks === 0;
 
-  const isTaskEmpty = countTasks === 0
+	function handleCreateNewTask() {
+		// @ts-ignore
+		event.preventDefault();
 
-  function handleCreateNewTask() {
-    event.preventDefault()
+		setTasks([...tasks, newTask]);
+		setCountTasks(tasks.length);
+		setNewTask("");
+	}
 
-    setTasks([...tasks, newTask])
-    setCountTasks(tasks.length)
-    setNewTask('')
-  }
+	function handleNewTaskChange() {
+		// @ts-ignore
+		event.target.setCustomValidity("");
 
-  function handleNewTaskChange() {
-    event.target.setCustomValidity('')
-    
-    setNewTask(event?.target.value)
-  }
+		// @ts-ignore
+		setNewTask(event?.target.value);
+	}
 
-  function deleteTask(taskToDelete) {
-    const tasksWithoutDeletedOne = tasks.filter(newList => {
-      return newList !== taskToDelete
-    })
-    setTasks(tasksWithoutDeletedOne)
-    setCountTasks(tasksWithoutDeletedOne.length - 1)
+	function deleteTask(taskToDelete: string) {
+		const tasksWithoutDeletedOne = tasks.filter((newList) => {
+			return newList !== taskToDelete;
+		});
+		setTasks(tasksWithoutDeletedOne);
+		setCountTasks(tasksWithoutDeletedOne.length - 1);
 
-    countCompletedTasks > 0 ? setCountCompletedTasks(countCompletedTasks - 1) : setCountCompletedTasks(0)
-  }
+		countCompletedTasks > 0
+			? setCountCompletedTasks(countCompletedTasks - 1)
+			: setCountCompletedTasks(0);
+	}
 
-  function completedTaks() {
-    setCountCompletedTasks(countCompletedTasks + 1)
-  }
+	function completedTask() {
+		setCountCompletedTasks(countCompletedTasks + 1);
+	}
 
-  function unCompletedTaks() {
-    setCountCompletedTasks(countCompletedTasks - 1)
-  }
+	function unCompletedTask() {
+		setCountCompletedTasks(countCompletedTasks - 1);
+	}
 
-  function emptyTasks() {
-    isTaskEmpty ? setTaskEmpty(true) : setTaskEmpty(false)
-    console.log(taskEmpty);
-    
-  }
+	function emptyTasks() {
+		isTaskEmpty ? setTaskEmpty(true) : setTaskEmpty(false);
+		console.log(taskEmpty);
+	}
 
-  return (
-    <div>
-      <Header />
-      <div className={styles.wrapper}>
-        <FormTask
-          submitNewTask={handleCreateNewTask}
-          newTaskChange={handleNewTaskChange}
-          value={newTask}
-        />
-        
-        <Counter allTaks={countTasks} completedTasks={countCompletedTasks} />
+	return (
+		<div>
+			<Header />
+			<div className={styles.wrapper}>
+				<FormTask
+					submitNewTask={handleCreateNewTask}
+					newTaskChange={handleNewTaskChange}
+					value={newTask}
+				/>
 
-        { countTasks === 0 ? <EmptyTasks /> : '' }        
+				<Counter
+					allTask={countTasks}
+					completedTasks={countCompletedTasks}
+					onEmptyTasks={emptyTasks}
+				/>
 
-        {
-          tasks.map(content => {
-            if (content === '') return
-            return (
-              <Taks
-                key={content}
-                content={content}
-                onDeleteTask={deleteTask}
-                onCompletedTaks={completedTaks}
-                onUncompletedTasks={unCompletedTaks}
-              />
-            )
-          })
-        }
-      </div>
-    </div>
-  )
+				{countTasks === 0 ? <EmptyTasks /> : ""}
+
+				{tasks.map((content) => {
+					if (content === "") return;
+					return (
+						<Task
+							key={content}
+							content={content}
+							onDeleteTask={deleteTask}
+							onCompletedTask={completedTask}
+							onUncompletedTasks={unCompletedTask}
+						/>
+					);
+				})}
+			</div>
+		</div>
+	);
 }
