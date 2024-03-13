@@ -6,7 +6,7 @@
   margin-bottom: 1.563rem;
 }
 
-.allTaskContent, .concluedTaskContent {
+.allTaskContent, .concludedTaskContent {
   font-size: 0.875rem;
   color: var(--blue);
   font-weight: bold;
@@ -16,11 +16,11 @@
   position: relative;
 }
 
-.concluedTaskContent {
+.concludedTaskContent {
   color: var(--purple);
 }
 
-.counterAllTasks, .counterConcluedTasks {
+.counterAllTasks, .counterConcludedTasks {
   min-width: 1.563rem;
   height: 1.188rem;
   background: var(--gray-400);
