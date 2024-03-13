@@ -20,7 +20,7 @@ export function App() {
 		// @ts-ignore
 		event.preventDefault();
 
-		setTasks([...tasks, newTask]);
+		setTasks((task) => [...task, newTask]);
 		setCountTasks(tasks.length);
 		setNewTask("");
 	}
