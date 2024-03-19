@@ -1,6 +1,4 @@
 import { PlusCircle } from "phosphor-react";
-import type React from "react";
-import type { FormEventHandler } from "react";
 import styles from "./FormTask.module.css";
 
 interface FormTaskProps {

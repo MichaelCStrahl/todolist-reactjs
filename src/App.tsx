@@ -55,7 +55,6 @@ export function App() {
 
 	function emptyTasks() {
 		isTaskEmpty ? setTaskEmpty(true) : setTaskEmpty(false);
-		console.log(taskEmpty);
 	}
 
 	return (
